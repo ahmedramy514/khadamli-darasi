@@ -1,0 +1,30 @@
+{
+  "name": "khadamli-darasi",
+  "version": "1.0.0",
+  "description": "خدملي دراسي - School Management & Learning Platform",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm start --prefix frontend\"",
+    "start": "node backend/server.js",
+    "build": "npm run build --prefix frontend",
+    "install-all": "npm install && npm install --prefix backend && npm install --prefix frontend"
+  },
+  "keywords": [
+    "education",
+    "school",
+    "management",
+    "learning"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "mongodb": "^7.0.0"
+  }
+}

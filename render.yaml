@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: khadamli-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install --prefix backend
+    startCommand: node backend/server.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: USE_IN_MEMORY_DB
+        value: "false"
