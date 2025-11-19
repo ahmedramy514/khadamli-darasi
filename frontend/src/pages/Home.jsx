@@ -88,7 +88,7 @@ const Home = () => {
               <span>دخول برمز</span>
             </button>
             <button
-              onClick={() => window.location.href = '/questions'}
+              onClick={() => navigate('/public-questions')}
               className="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-3 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl hover:shadow-lg transition font-semibold text-xs sm:text-sm"
             >
               <span>❓</span>
