@@ -11,6 +11,7 @@ const Badges = () => {
     if (user) {
       fetchBadges();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const fetchBadges = async () => {

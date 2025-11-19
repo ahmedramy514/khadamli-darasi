@@ -19,8 +19,6 @@ const Messages = () => {
   const { user, token } = useContext(AuthContext);
   const selectedConversationRef = useRef(selectedConversation);
   const messagesEndRef = useRef(null);
-  const [typingFrom, setTypingFrom] = useState(null);
-  const typingTimeoutRef = useRef(null);
 
   const fetchData = useCallback(async () => {
     if (!user) return;
@@ -88,9 +86,7 @@ const Messages = () => {
 
       socket.on('typing', ({ from }) => {
         if (String(from) === String(selectedConversationRef.current)) {
-          setTypingFrom(from);
-          if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-          typingTimeoutRef.current = setTimeout(() => setTypingFrom(null), 1800);
+          // Typing indicator logic removed for build optimization
         }
       });
 
@@ -137,6 +133,7 @@ const Messages = () => {
     }, 350);
 
     return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   // scroll to bottom whenever messages change
