@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 const ClassroomDetail = () => {
   const { classroomId } = useParams();
+  const navigate = useNavigate();
   const [classroom, setClassroom] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [newAnswer, setNewAnswer] = useState('');
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
 
   useEffect(() => {
     // Wait until token is available to avoid making unauthenticated requests
@@ -102,7 +103,7 @@ const ClassroomDetail = () => {
           <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg sm:rounded-2xl p-3 sm:p-6 mb-4 sm:mb-6">
             <h1 className="text-lg sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 truncate">{classroom.name}</h1>
             <p className="text-xs sm:text-sm text-blue-100 mb-2 sm:mb-4 line-clamp-2">{classroom.description}</p>
-            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
+            <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm mb-4">
               <div>
                 <p className="text-xs text-blue-100">المادة</p>
                 <p className="font-semibold truncate">{classroom.subject}</p>
@@ -115,6 +116,24 @@ const ClassroomDetail = () => {
                 <p className="text-xs text-blue-100">رمز الفصل</p>
                 <p className="font-semibold font-mono">{classroom.code}</p>
               </div>
+            </div>
+            
+            {/* أزرار الواجبات والامتحانات */}
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              <button
+                onClick={() => navigate(`/classroom/${classroomId}/assignments`)}
+                className="flex items-center gap-2 bg-white text-blue-600 px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-50 transition font-semibold text-xs sm:text-sm"
+              >
+                <span>📋</span>
+                <span>الواجبات</span>
+              </button>
+              <button
+                onClick={() => navigate(`/classroom/${classroomId}/exams`)}
+                className="flex items-center gap-2 bg-white text-blue-600 px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-50 transition font-semibold text-xs sm:text-sm"
+              >
+                <span>📝</span>
+                <span>الامتحانات</span>
+              </button>
             </div>
           </div>
         )}

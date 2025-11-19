@@ -13,6 +13,7 @@ import Messages from './pages/Messages';
 import PublicQuestions from './pages/PublicQuestions';
 import ClassroomDetail from './pages/ClassroomDetail';
 import AssignmentsDetail from './pages/AssignmentsDetail';
+import Exams from './pages/Exams';
 import Leaderboard from './pages/Leaderboard';
 import Badges from './pages/Badges';
 import Assignments from './pages/Assignments';
@@ -91,6 +92,15 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <AssignmentsDetail />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/classroom/:classroomId/exams"
+          element={
+            <ProtectedRoute>
+              <Exams />
             </ProtectedRoute>
           }
         />

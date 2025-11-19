@@ -84,6 +84,8 @@ app.use('/api/questions', require('./routes/questions'));
 app.use('/api/users', require('./routes/users'));
 // assignments routes
 app.use('/api/assignments', require('./routes/assignments'));
+// exams routes
+app.use('/api/exams', require('./routes/exams'));
 // messaging and notifications
 app.use('/api/messages', require('./routes/messages'));
 app.use('/api/notifications', require('./routes/notifications'));
