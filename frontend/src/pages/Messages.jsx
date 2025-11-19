@@ -260,17 +260,18 @@ const Messages = () => {
             </div>
 
             {/* قائمة الرسائل */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3">
-              {messages.map((msg) => (
+            <div className="flex-1 p-4 overflow-y-auto space-y-2 flex flex-col-reverse bg-[#e5ddd5]">
+              <div ref={messagesEndRef} />
+              {[...messages].reverse().map((msg) => (
                 <div
                   key={msg._id}
                   className={`flex ${msg.sender._id === user.id ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-xs px-3 py-2 rounded-lg ${
+                    className={`max-w-[70%] px-3 py-2 rounded-lg shadow-sm ${
                       msg.sender._id === user.id
-                        ? 'bg-blue-600 text-white rounded-br-none'
-                        : 'bg-gray-200 text-gray-800 rounded-bl-none'
+                        ? 'bg-[#dcf8c6] text-gray-800 rounded-br-none'
+                        : 'bg-white text-gray-800 rounded-bl-none'
                     }`}
                   >
                     {msg.attachment && (
@@ -299,13 +300,17 @@ const Messages = () => {
                       </div>
                     )}
                     <p className="text-sm break-words whitespace-pre-wrap">{msg.content}</p>
-                    <p className="text-xs mt-1 opacity-75">
-                      {new Date(msg.createdAt).toLocaleTimeString('ar-SA')}
-                    </p>
+                    <div className="flex items-center justify-end gap-1 mt-1">
+                      <p className="text-[10px] opacity-60">
+                        {new Date(msg.createdAt).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
+                      </p>
+                      {msg.sender._id === user.id && (
+                        <span className="text-[10px]">{msg.isRead ? '✓✓' : '✓'}</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
-              <div ref={messagesEndRef} />
             </div>
 
             {/* صندوق الإدخال */}
