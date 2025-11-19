@@ -244,10 +244,17 @@ const Messages = () => {
 
         {/* الجانب الأيمن: محتوى المحادثة */}
         {selectedConversation ? (
-          <div className="hidden md:flex md:w-2/3 flex-col bg-white">
+          <div className="flex md:w-2/3 flex-col bg-white w-full md:relative fixed inset-0 z-50">
             {/* رأس المحادثة */}
-            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-              <h2 className="text-xl font-bold">
+            <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center gap-3">
+              {/* زر الرجوع للموبايل */}
+              <button 
+                onClick={() => setSelectedConversation(null)}
+                className="md:hidden text-white p-2 hover:bg-white/20 rounded-lg"
+              >
+                ←
+              </button>
+              <h2 className="text-xl font-bold flex-1">
                 {conversations.find((c) => c.userId === selectedConversation)?.userName || 'محادثة'}
               </h2>
             </div>

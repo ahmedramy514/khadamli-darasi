@@ -224,7 +224,7 @@ const Navbar = () => {
           <span className="mt-0.5">الرئيسية</span>
         </button>
 
-        <button onClick={() => navigate('/questions')} className="flex flex-col items-center text-xs text-gray-700" aria-label="الأسئلة">
+        <button onClick={() => navigate('/public-questions')} className="flex flex-col items-center text-xs text-gray-700" aria-label="الأسئلة">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none">
             <path d="M12 20h9" stroke="#374151" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M12 2v18" stroke="#374151" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
