@@ -31,14 +31,33 @@ router.get('/', auth, async (req, res) => {
       // Return assignments for classrooms this teacher owns
       const classes = await Classroom.find({ teacher: userId }).select('_id');
       const classIds = classes.map(c => c._id);
-      const assignments = await Assignment.find({ classroom: { $in: classIds } }).lean();
+      const assignments = await Assignment.find({ classroom: { $in: classIds } })
+        .populate('submissions.student', 'name email')
+        .lean();
       return res.json(assignments);
     }
 
     // student: return assignments for classrooms they belong to
     const classes = await Classroom.find({ students: userId }).select('_id');
     const classIds = classes.map(c => c._id);
-    const assignments = await Assignment.find({ classroom: { $in: classIds } }).lean();
+    const assignments = await Assignment.find({ classroom: { $in: classIds } })
+      .populate('submissions.student', 'name email')
+      .lean();
+    res.json(assignments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'فشل جلب الواجبات' });
+  }
+});
+
+// GET /api/assignments/classroom/:classroomId - get assignments for a specific classroom
+router.get('/classroom/:classroomId', auth, async (req, res) => {
+  try {
+    const { classroomId } = req.params;
+    const assignments = await Assignment.find({ classroom: classroomId })
+      .populate('createdBy', 'name email')
+      .populate('submissions.student', 'name email')
+      .lean();
     res.json(assignments);
   } catch (err) {
     console.error(err);

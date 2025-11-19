@@ -425,6 +425,34 @@ const ExamsPage = () => {
                           />
                         </div>
                       </div>
+
+                      {/* MCQ Options */}
+                      {q.type === 'mcq' && (
+                        <div className="mt-3">
+                          <label className="block text-xs font-semibold text-gray-700 mb-2">الخيارات (اكتب كل خيار في سطر)</label>
+                          <textarea
+                            value={q.options?.join('\n') || ''}
+                            onChange={(e) => updateQuestion(idx, 'options', e.target.value.split('\n').filter(o => o.trim()))}
+                            placeholder="الخيار الأول\nالخيار الثاني\nالخيار الثالث\nالخيار الرابع"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm resize-none"
+                            rows="4"
+                          />
+                          
+                          <div className="mt-2">
+                            <label className="block text-xs font-semibold text-gray-700 mb-1">الإجابة الصحيحة</label>
+                            <select
+                              value={q.correctAnswer || ''}
+                              onChange={(e) => updateQuestion(idx, 'correctAnswer', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                            >
+                              <option value="">اختر الإجابة الصحيحة</option>
+                              {q.options?.map((opt, optIdx) => (
+                                <option key={optIdx} value={opt}>{opt}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
