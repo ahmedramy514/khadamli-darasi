@@ -37,6 +37,9 @@ const AppContent = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
+        {/* الأسئلة العامة - متاحة للجميع */}
+        <Route path="/public-questions" element={<PublicQuestions />} />
 
         <Route
           path="/"
