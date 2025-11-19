@@ -282,16 +282,32 @@ const AssignmentsPage = () => {
 
                     {/* Submission Info */}
                     {userSubmission && (
-                      <div className="mt-3 sm:mt-4 bg-green-50 p-2 sm:p-3 rounded-lg">
+                      <div className="mt-3 sm:mt-4 bg-green-50 border border-green-200 p-2 sm:p-3 rounded-lg">
                         <p className="text-xs sm:text-sm text-green-700">
-                          تم التسليم في:{' '}
+                          ✔️ تم التسليم في:{' '}
                           <span className="font-semibold">
                             {new Date(userSubmission.submittedAt).toLocaleDateString('ar-SA')}
                           </span>
                         </p>
-                        {userSubmission.grade !== 0 && (
-                          <p className="text-xs sm:text-sm text-green-700 mt-1">
-                            التقييم: <span className="font-semibold">{userSubmission.grade}</span>
+                        {userSubmission.gradedAt && (
+                          <div className="mt-2 pt-2 border-t border-green-200">
+                            <div className="flex items-center gap-2">
+                              <span className="text-lg">🎖️</span>
+                              <p className="text-xs sm:text-sm font-bold text-green-800">
+                                الدرجة: {userSubmission.grade} / 100
+                              </p>
+                            </div>
+                            {userSubmission.feedback && (
+                              <p className="text-xs sm:text-sm text-gray-700 mt-2 bg-white p-2 rounded">
+                                💬 {userSubmission.feedback}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        {!userSubmission.gradedAt && (
+                          <p className="text-xs sm:text-sm text-yellow-700 mt-2 flex items-center gap-1">
+                            <span>⏳</span>
+                            <span>في انتظار التصحيح...</span>
                           </p>
                         )}
                       </div>
